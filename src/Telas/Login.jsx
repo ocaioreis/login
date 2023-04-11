@@ -1,20 +1,26 @@
 import React from "react";
 import styles from "./Login.module.css";
 import { LoginContext, Context } from "../LoginContext";
-import { CADASTRAR } from "../Api";
 
 const Login = () => {
   const global = React.useContext(Context);
 
+  const [newNome, setNewNome] = React.useState();
   const [newEmail, setNewEmail] = React.useState();
   const [newSenha, setNewSenha] = React.useState();
 
-  async function cadastro(event) {
-    event.preventDefault();
-    global.dados.push({ email: newEmail, senha: newSenha });
-  }
+  const [login, setLogin] = React.useState();
+  const [senha, setSenha] = React.useState();
 
-  console.log(global.dados);
+  function cadastro(event) {
+    event.preventDefault();
+    global.dados.push({
+      nome: newNome,
+      email: newEmail,
+      senha: newSenha,
+    });
+    global.send();
+  }
 
   return (
     <section className={styles.content}>
@@ -40,20 +46,28 @@ const Login = () => {
         <div className={styles.register}>
           <form className={styles.form} onSubmit={cadastro}>
             <label htmlFor="chk">Cadastre-se</label>
-            <input type="text" className={styles.input} placeholder="Nome" />
+            <input
+              type="text"
+              className={styles.input}
+              placeholder="Nome"
+              onBlur={(content) => setNewNome(content.target.value)}
+              required
+            />
             <input
               type="email"
               className={styles.input}
               placeholder="Email"
               onBlur={(content) => setNewEmail(content.target.value)}
+              required
             />
             <input
               type="password"
               className={styles.input}
               placeholder="Senha"
+              required
               onBlur={(content) => setNewSenha(content.target.value)}
             />
-            <button onClick={() => global.send(global.dados)}>Ok</button>
+            <button>Ok</button>
           </form>
         </div>
       </div>

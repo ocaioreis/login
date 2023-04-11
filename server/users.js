@@ -1,1 +1,1 @@
-export default [{ email: "", senha: "" }];
+export default [{ email: "", senha: "", nome: "" }];
