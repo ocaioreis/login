@@ -25,7 +25,14 @@ app.use(
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.json(users);
+  pool.query("SELECT * FROM db.user", (err, result) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(result.rows);
+    res.json(result.rows);
+  });
 });
 
 app.listen(3000, () => {
@@ -58,12 +65,4 @@ app.post("/", (req, res) => {
       res.status(201).send(`Dados inseridos: ${nome}, ${email}, ${senha}`);
     }
   );
-});
-
-pool.query("SELECT * FROM db.user", (err, res) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  console.log(res.rows);
 });

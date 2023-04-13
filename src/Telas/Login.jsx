@@ -34,7 +34,15 @@ const Login = () => {
         <div className={styles.login}>
           <form className={styles.form}>
             <label htmlFor="chk">Login</label>{" "}
-            <input type="text" className={styles.input} placeholder="email" />{" "}
+            <input
+              type="text"
+              className={styles.input}
+              placeholder="email"
+              /* onBlur={(content) => {
+                if (global.dados.includes(content.target.value))
+                  return alert("naosei");
+              }} */
+            />{" "}
             <input
               type="password"
               className={styles.input}
