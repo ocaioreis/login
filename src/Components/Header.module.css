@@ -49,7 +49,7 @@ a:hover{
     .menu{
         display: block;
         position: absolute;
-        width: 100%;
+        width: 40%;
         top: 70px;
         right: 0px;
         background: #e7e7e7;
@@ -65,8 +65,8 @@ a:hover{
         overflow-y: auto; /*preciso disso aqui pra barra de scroll*/
     }
     .menu a{
-        padding: 1rem 0;
-        margin: 0 1rem;
+        padding: 1rem;
+       
         border-bottom: 2px solid rgba(0, 0, 0, .05);
     }
     .btnMobile{
@@ -103,4 +103,8 @@ a:hover{
         transform: rotate(-135deg);
         top: -7px;
     }
+}
+
+.none {
+    display: none;
 }

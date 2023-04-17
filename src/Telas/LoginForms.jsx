@@ -9,30 +9,37 @@ const LoginForms = () => {
   const [newEmail, setNewEmail] = React.useState();
   const [newSenha, setNewSenha] = React.useState();
 
-  const [login, setLogin] = React.useState();
-  const [senha, setSenha] = React.useState();
-
-  function verificarLogin(event) {
+  async function verificarLogin(event) {
     event.preventDefault();
     const user = global.dados.find(
-      (usuario) => usuario.email === login && usuario.senha === senha
+      (usuario) =>
+        usuario.email === global.login && usuario.senha === global.senha
     );
+
     if (user) {
-      console.log("boa");
+      global.setNome(user.nome);
+      global.setVerificarLogado();
       global.setLogado(true);
     } else {
-      console.log("deu não");
+      alert("Usuário e/ou senha inválidos!");
     }
   }
 
   function cadastro(event) {
-    event.preventDefault();
-    global.dados.push({
-      nome: newNome,
-      email: newEmail,
-      senha: newSenha,
-    });
-    global.send();
+    const usuario = global.dados.find((usuario) => usuario.email === newEmail);
+    if (usuario) {
+      event.preventDefault();
+      alert("Usuário já cadastrado!");
+    } else {
+      global.dados.push({
+        nome: newNome,
+        email: newEmail,
+        senha: newSenha,
+      });
+      global.send();
+      console.log(global.dados);
+      console.log(newEmail);
+    }
   }
 
   return (
@@ -51,14 +58,14 @@ const LoginForms = () => {
               type="text"
               className={styles.input}
               placeholder="email"
-              onBlur={(content) => setLogin(content.target.value)}
+              onBlur={(content) => global.setLogin(content.target.value)}
               required
             />{" "}
             <input
               type="password"
               className={styles.input}
               placeholder="senha"
-              onBlur={(content) => setSenha(content.target.value)}
+              onBlur={(content) => global.setSenha(content.target.value)}
               required
             />
             <button className={styles.button}>Entrar</button>

@@ -1,0 +1,16 @@
+.content {
+    display: flex;
+}
+
+.button {
+    background-color: darkslateblue;
+    height: 1rem;
+    width: 1rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+}
+
+.button:focus,
+.button:hover {
+    border: 1px solid whitesmoke;
+}

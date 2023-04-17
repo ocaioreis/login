@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import styles from "./Header.module.css";
+import { LoginContext, Context } from "../LoginContext";
 
 const Header = () => {
+  const global = React.useContext(Context);
+
   let nav = React.useRef();
 
   function toggleMenu(event) {
@@ -14,27 +17,29 @@ const Header = () => {
       <a href="" className={styles.logo}>
         Logo
       </a>
-
-      <nav className={`${styles.nav} `} ref={nav}>
-        <button className={styles.btnMobile} onClick={toggleMenu}>
-          Menu
-          <span className={styles.hamburguer}></span>
-        </button>
-        <ul className={styles.menu}>
-          <li>
-            <a href="/"></a>A
-          </li>
-          <li>
-            <a href="/"></a>B
-          </li>
-          <li>
-            <a href="/"></a>C
-          </li>
-          <li>
-            <a href="/"></a>D
-          </li>
-        </ul>
-      </nav>
+      {global.logado ? (
+        <nav className={styles.nav} ref={nav}>
+          <button className={styles.btnMobile} onClick={toggleMenu}>
+            {global.logado ? `${global.nome}` : ""}
+            <span className={styles.hamburguer}></span>
+          </button>
+          <ul className={styles.menu}>
+            <li>
+              <a href="/">Minha Conta</a>
+            </li>
+            <li>
+              <a href="/">Tools</a>
+            </li>
+            <li>
+              <a href="/" onClick={() => global.logOut()}>
+                Sair
+              </a>
+            </li>
+          </ul>
+        </nav>
+      ) : (
+        <p></p>
+      )}
     </header>
   );
 };

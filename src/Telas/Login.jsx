@@ -5,7 +5,25 @@ import LoginForms from "./LoginForms";
 const Login = () => {
   const global = React.useContext(Context);
 
-  return global.logado ? <h1>Você já está logado</h1> : <LoginForms />;
+  React.useEffect(() => {
+    global.getVerificarLogado();
+  }, [global.logado]);
+
+  function attNome() {
+    if (global.nome) {
+      window.localStorage.setItem("nome", global.nome);
+    } else {
+      window.localStorage.getItem("nome");
+    }
+  }
+
+  return global.logado ? (
+    <h1>
+      Olá, {attNome()} {global.nome}!
+    </h1>
+  ) : (
+    <LoginForms />
+  );
 };
 
 export default Login;

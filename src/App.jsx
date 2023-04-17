@@ -6,10 +6,8 @@ import { Context, LoginContext } from "./LoginContext";
 function App() {
   return (
     <LoginContext>
-      <div>
-        <Header />
-        <Login />
-      </div>
+      <Header />
+      <Login />
     </LoginContext>
   );
 }
